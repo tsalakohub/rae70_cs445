@@ -1,3 +1,4 @@
+
 /*
 	Deck class
 */
@@ -6,7 +7,7 @@
 public class Deck
 {
 	private int[] deck;
-	private final int MAX_DECK_SIZE = 20;
+	private final int MAX_DECK_SIZE = 30;
 	public Deck( int numCards )
 	{	if ( numCards%2 != 0 || numCards > MAX_DECK_SIZE ) 
 		{
@@ -89,4 +90,61 @@ public class Deck
         return true;
 		//return false; // JUST HERE TO COMPILE
 	}
-}	// END DECK CLASS
+	
+	//RETURNS BINARY
+	public String toBitString( int n ) 
+	{
+		if(n == 0){
+			return "";
+		}
+		int power = 0;
+		int bi = (int) ((Math.log(n) / Math.log(2)) + 1);
+		char temp[] = new char [bi];
+		for(int i= 0; i<temp.length; i++){
+			temp[i] = '0';
+		}
+		while(n != 0){
+			for(int i = 0;Math.pow(2, i) <= n; i++){
+				power = i;
+			}
+			temp[(temp.length - 1) - power] = '1';
+			n = (int) (n - Math.pow(2,power));
+			}
+		String str = new String(temp);	
+		return str;
+	}
+		
+		
+
+		
+			
+// END DECK CLASS
+public static void main(String[] args){
+int n = 273;
+int power = 0;
+int bi = (int) ((Math.log(n) / Math.log(2)) + 1);
+//System.out.print(bi);
+char temp[] = new char[bi];
+for(int i= 0; i<temp.length; i++){
+	temp[i] = '0';
+
+}
+while(n != 0){
+	for(int i = 0;Math.pow(2, i) <= n; i++){
+		power = i;
+	}
+	temp[(temp.length - 1) - power] = '1';
+	n = (int) (n - Math.pow(2,power));
+	}
+
+	
+String str = new String(temp);
+System.out.print(str);
+}
+//System.out.print(n = (int) (n - Math.pow(2,power)));
+}
+
+
+
+
+
