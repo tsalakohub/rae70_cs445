@@ -2,8 +2,6 @@
 /*
 	Deck class
 */
-
-
 public class Deck
 {
 	private int[] deck;
@@ -21,7 +19,6 @@ public class Deck
             deck[i] = i;
         }
 	}
-	
 	public String toString()
 	{
 		String deckStr = "";
@@ -29,7 +26,6 @@ public class Deck
 			deckStr += deck[i] + " ";
 		return deckStr;
 	}
-
 	// ONLY WORKS ON DECK WITH EVEN NUMBER OF CARDS
 	// MODIFIES THE MEMBER ARRAY DECK
 	public void inShuffle()
@@ -50,10 +46,7 @@ public class Deck
 			}
 		}
 		deck = tem ;	
-		
-
 	}
-
 	// ONLY WORKS ON DECK WITH EVEN NUMBER OF CARDS
 	// MODIFIES THE MEMBER ARRAY DECK
 	public void outShuffle()
@@ -74,9 +67,7 @@ public class Deck
 			} 
 		}
 		deck = tem;	
-
 	}
-	
 	// RETURNS TRUE IF DECK IN ORIGINAL SORTED:  0 1 2 3 ...
 	public boolean inSortedOrder()
 	{
@@ -90,7 +81,6 @@ public class Deck
         return true;
 		//return false; // JUST HERE TO COMPILE
 	}
-	
 	//RETURNS BINARY
 	public String toBitString( int n ) 
 	{
@@ -114,34 +104,8 @@ public class Deck
 		return str;
 	}
 		
-		
-
-		
-			
 // END DECK CLASS
-public static void main(String[] args){
-int n = 273;
-int power = 0;
-int bi = (int) ((Math.log(n) / Math.log(2)) + 1);
-//System.out.print(bi);
-char temp[] = new char[bi];
-for(int i= 0; i<temp.length; i++){
-	temp[i] = '0';
 
-}
-while(n != 0){
-	for(int i = 0;Math.pow(2, i) <= n; i++){
-		power = i;
-	}
-	temp[(temp.length - 1) - power] = '1';
-	n = (int) (n - Math.pow(2,power));
-	}
-
-	
-String str = new String(temp);
-System.out.print(str);
-}
-//System.out.print(n = (int) (n - Math.pow(2,power)));
 }
 
 
