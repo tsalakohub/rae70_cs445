@@ -1,8 +1,12 @@
-// 2021 FALL CS 445 LAB #3  STUDENT STARTER FILE
+import java.io.*;
 
+// NOTICE THE "<T extends Comparable<T>>"
+// using <T extends Comparable<T>> in here means compiler wont let the code in main send in any T type
+// that does not implement Comparable.  Now we do not have to cast the incoming key to a Comparable
+// in our insertInOrder() method. Compiler now lets us call .compareTo off the dot on the incoming key
+// without throwing an error.
 
-
-public class LinkedList<T>
+public class LinkedList<T extends Comparable<T>> 
 {
 	private Node<T> head;  // pointer to the front (first) element of the list
 
@@ -11,65 +15,76 @@ public class LinkedList<T>
 		head = null; // compiler does this anyway. just for emphasis
 	}
 
-	// INSERTS NEW NODE AT FRONT PUSHING EXISTING NODES BACK ONE PLACE
-	
+	// LOAD LINKED LIST FROM INCOMING FILE
+	@SuppressWarnings("unchecked")
+	public LinkedList( String fileName, boolean orderedFlag )
+	{	head = null;
+		try
+		{
+			BufferedReader infile = new BufferedReader( new FileReader( fileName ) );
+			while ( infile.ready() )
+			{
+				if (orderedFlag)
+					insertInOrder( (T)infile.readLine() );  // WILL INSERT EACH ELEM INTO IT'S SORTED POSITION
+				else
+					insertAtTail( (T)infile.readLine() );  // TACK EVERY NEWELEM ONTO END OF LIST. ORIGINAL ORDER PRESERVED
+			}
+			infile.close();
+		}
+		catch( Exception e )
+		{
+			System.out.println( "FATAL ERROR CAUGHT IN C'TOR: " + e );
+			System.exit(0);
+		}
+	}
+
+	//-------------------------------------------------------------
+
+	// inserts new elem at front of list - pushing old elements back one place
+
 	public void insertAtFront(T data)
 	{
 		head = new Node<T>(data,head);
 	}
 
-	// USE THE TOSTRING AS OUR PRINT
+	// we use toString as our print
+
 	public String toString()
 	{
 		String toString = "";
 
-		for (Node<T> curr = head; curr != null; curr = curr.getNext())
+		for (Node<T> curr = head; curr != null; curr = curr.next )
 		{
-			toString += curr.getData();		// WE ASSUME OUR T TYPE HAS toString() DEFINED
-			if (curr.getNext() != null)
-				toString += " -> ";
+			toString += curr.data;		// WE ASSUME OUR T TYPE HAS toString() DEFINED
+			if (curr.next != null)
+				toString += " ";
 		}
 
-		return toString + "\n";
+		return toString;
 	}
 
 	// ########################## Y O U   W R I T E    T H E S E    M E T H O D S ########################
 
-	// TACK A NEW NODE ONTO THE END (CABOOSE) OF THE LIST
-	public void insertAtTail(T data)
-	{
-		// YOUR CODE HERE. MUST USE insertAtFront() IN BASE CASE
-		
-		if(head == null){
-			insertAtFront(data);
-			return;
-		}
-		Node<T> cur = head;
-		while(cur.getNext() != null){
-			cur = cur.getNext();
-		}
-		Node<T> tail= new Node<T>(data,null);
-		cur.setNext(tail);
-	}
 
-	// OF COURSE MORE EFFICIENT TO KEEP INTERNAL COUNTER BUT WE MAKE YOU 
-	// COMPUTE IT DYNAMICALLY WITH A TRAVERSAL LOOP
-	public int size()
+
+	public int size() // OF COURSE MORE EFFICIENT to KEEP COUNTER BUT YOU  MUST WRITE LOOP
 	{
 		int size = 1;
     	Node<T> cur = head;
-    	while(cur.getNext()!= null)
+    	while(cur.next!= null)
     {
-        cur = cur.getNext();
+        cur = cur.next;
         size++;     
     }
-    return size;
-		 //JUST TO MAKE IT COMPILE. REPLACE WITH YOUR CODE
+        return size; // YOUR CODE HERE
 	}
-	
 
-	// MUST USE search() METHOD IN THIS CODE TO DETERMINE THE RETURN VALUE
-	// NO LOOPS ALLOWED 
+	public boolean empty()
+	{
+		return(head == null);
+         // YOUR CODE HERE
+	}
+
 	public boolean contains( T key )
 	{
 		if(key == null){
@@ -80,45 +95,202 @@ public class LinkedList<T>
 		else
 			return true;
 
-		
-		 //JUST TO MAKE IT COMPILE. REPLACE WITH YOUR CODE
+		  // YOUR CODE HERE
 	}
 
-	// TRAVERSE LIST FRONT TO BACK LOOKING FOR THIS DATA VALUE.
-	// RETURN REF TO THE FIRST NODE THAT CONTAINS THIS KEY. 
-	// DO NOT- RETURN REF TO KEY ISIDE NODE
-	// RETURN NULL IF NOT FOUND
 	public Node<T> search( T key )
 	{
 		Node<T> cur = head;
-		while(cur.getNext() != null){
-			if(key.equals(cur.getData()))
+		while(cur.next != null){
+			if(key.equals(cur.data))
 				return cur;
 				break;
 			}
-		return null;
-		
-		
-		 //JUST TO MAKE IT COMPILE. REPLACE WITH YOUR CODE
+		return null;  // YOUR CODE HERE
 	}
-} //END OF LINKEDLIST CLASS DEFINITION
 
+	// TACK A NEW NODE (CABOOSE) ONTO THE END OF THE LIST
+	public void insertAtTail(T data)
+	{
+		if(head == null){
+			insertAtFront(data);
+			return;
+		}
+		Node<T> cur = head;
+		while(cur.next != null){
+			cur = cur.next;
+		}
+		Node<T> tail= new Node<T>(data,null);
+		cur.next = tail;// YOUR CODE HERE
+	}
 
-		/*if(head == null){
+	// IF YOU DEFINE <T> at the top of this class as <T implements Comparable>
+	// YOU DO NOT HAVE TO CAST TO COMPARABLE AND YOU DO NOT NEED TO SUPPRESS 
+	public void insertInOrder(T  data)
+	{
+		// YOUR CODE HERE
+        if(head == null || data.compareTo(head.data) < 0 ){
+            insertAtFront(data);
+            return;
+        }
+        Node<T> cur = head;
+        while(cur.next != null && data.compareTo(cur.next.data)> 0){
+            cur = cur.next;
+        }
+        Node<T> enter = new Node<T>(data);
+        
+        
+        enter.next = cur.next;
+        cur.next = enter;
+        
+	}
+
+	public boolean remove(T key)
+	{
+		 //  REPLACE WITH YOUR CODE 
+        if(head == null || head.data.equals(key)){
+            return removeAtFront();
+        }
+        
+        Node<T> cur = head;
+        while(cur.next != null && !cur.next.data.equals(key)){
+            cur = cur.next;
+        }
+        if(cur.next == null){
+            return false;
+        }else{
+            cur.next = cur.next.next;
+            return true;
+        }
+
+        
+	}
+
+	public boolean removeAtTail()	// RETURNS TRUE IF THERE WAS NODE TO REMOVE
+	{
+		 // YOUR CODE HERE
+        if(head == null){
             return false;
         }
-        if(only 1 node//head.next == null){
-            return RemoveatFront();
-        }//id node after tail??
-        //if(cur.next.next == null){
-            cur.next = null;
+        if(head.next == null){
+            return removeAtFront();
         }
-        Node<T> cur = head
-       
-       
-       
-       
-        while(get.next != null){
-            cur = cur.next
+        Node<T> cur = head;
+        while(cur.next != null){
+            cur = cur.next;
         }
-        cur.next = null*/
+        cur.next = null;
+        return true;
+	}
+
+	public boolean removeAtFront() // RETURNS TRUE IF THERE WAS NODE TO REMOVE
+	{
+		if(head == null){
+            return false;
+        }
+        head = head.next;
+        return true;
+        
+        // YOUR CODE HERE
+	}
+
+	public LinkedList<T> union( LinkedList<T> other )
+	{
+		LinkedList<T> union = new LinkedList<T>();
+
+		// YOUR CODE HERE
+		
+        Node<T> cur = this.head;
+		if(cur == null){
+			return union;
+		}else{
+			union.insertAtFront(cur.data);
+		}
+        while(cur.next != null){
+            cur = cur.next;
+            union.insertInOrder(cur.data);
+		}
+        
+		Node<T> cur1 = other.head;
+		while(cur1.next != null){
+			if(!union.contains(cur1.data)){
+				union.insertInOrder(cur1.data);
+			}
+			cur1 = cur1.next;
+		}   
+
+		return union;
+	}
+	public LinkedList<T> inter( LinkedList<T> other )
+	{
+		LinkedList<T> inter = new LinkedList<T>();
+
+		// YOUR CODE HERE
+		Node<T> cur = this.head;
+		Node<T> cur1 = other.head;
+		if(cur == null || cur1 == null){
+			return inter;
+		}
+		while(cur.next != null){
+			if(other.contains(cur.data)){
+				inter.insertInOrder(cur.data);
+			}
+		cur = cur.next;
+		}
+
+		return inter;
+	}
+	public LinkedList<T> diff( LinkedList<T> other )
+	{
+		LinkedList<T> diff = new LinkedList<T>();
+
+		// YOUR CODE HERE
+		Node<T> cur = this.head;
+		while(cur.next != null){
+			if(!other.contains(cur.data)){
+				diff.insertInOrder(cur.data);
+			}
+		cur = cur.next;
+		}
+
+
+		return diff;
+	}
+	public LinkedList<T> xor( LinkedList<T> other )
+	{
+		return (this.union(other).diff(this.inter(other)));  // REPLACE WITH YOUR CODE 
+
+	}
+
+} //END LINKEDLIST CLASS 
+
+// A D D   N O D E   C L A S S  D O W N   H E R E 
+// R E M O V E  A L L  P U B L I C  &  P R I V A T E (except toString)
+// R E M O V E  S E T T E R S  &  G E T T E R S 
+// M A K E  T O  S T R I N G  P U B L I C
+class Node<T extends Comparable<T>> // tells compiler our incoming T type implements Comparable
+{
+    T data;
+    Node<T> next;
+
+    Node()
+    {
+     this( null, null );
+    }
+
+    Node(T data)
+    {
+        this( data, null );
+    }
+
+    Node(T data, Node<T> next)
+    {
+        this.data = data;
+        this.next = next;
+    }
+    public String toString()
+    {
+        return ""+ data;
+    } 
+        
+} //EOF
