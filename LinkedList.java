@@ -87,26 +87,20 @@ public class LinkedList<T extends Comparable<T>>
 
 	public boolean contains( T key )
 	{
-		if(key == null){
-			return false;
-		}
-		if(search(key) == null)
-			return false;
-		else
-			return true;
+		
+		return search(key) != null;
 
 		  // YOUR CODE HERE
 	}
 
 	public Node<T> search( T key )
 	{
+		
 		Node<T> cur = head;
-		while(cur.next != null){
-			if(key.equals(cur.data))
-				return cur;
-				break;
-			}
-		return null;  // YOUR CODE HERE
+		while(cur != null && !key.equals(cur.data)){
+			cur = cur.next;
+		}
+		return cur;  // YOUR CODE HERE
 	}
 
 	// TACK A NEW NODE (CABOOSE) ONTO THE END OF THE LIST
@@ -176,7 +170,7 @@ public class LinkedList<T extends Comparable<T>>
             return removeAtFront();
         }
         Node<T> cur = head;
-        while(cur.next != null){
+        while(cur.next.next != null){
             cur = cur.next;
         }
         cur.next = null;
@@ -203,16 +197,15 @@ public class LinkedList<T extends Comparable<T>>
         Node<T> cur = this.head;
 		if(cur == null){
 			return union;
-		}else{
-			union.insertAtFront(cur.data);
 		}
-        while(cur.next != null){
-            cur = cur.next;
+        while(cur != null){
+            
             union.insertInOrder(cur.data);
+			cur = cur.next;
 		}
         
 		Node<T> cur1 = other.head;
-		while(cur1.next != null){
+		while(cur1 != null){
 			if(!union.contains(cur1.data)){
 				union.insertInOrder(cur1.data);
 			}
@@ -231,6 +224,7 @@ public class LinkedList<T extends Comparable<T>>
 		if(cur == null || cur1 == null){
 			return inter;
 		}
+		
 		while(cur.next != null){
 			if(other.contains(cur.data)){
 				inter.insertInOrder(cur.data);
@@ -246,7 +240,7 @@ public class LinkedList<T extends Comparable<T>>
 
 		// YOUR CODE HERE
 		Node<T> cur = this.head;
-		while(cur.next != null){
+		while(cur != null){
 			if(!other.contains(cur.data)){
 				diff.insertInOrder(cur.data);
 			}
