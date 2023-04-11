@@ -33,31 +33,32 @@ public class MyString implements MyComparable
 	//RETURNS 0 if strings are lexically identical in every way, +1 if this string greater, else -1
 	public int myCompareTo(MyString other)
 	{
-		MyString str1 = this;
-        MyString str2 = other;
-
-        if(str1 == null && str2 == null){
+		
+		for (int i = 0; i < this.length() && i < other.length(); i++) {
+            if ((int)this.charAt(i) ==(int)other.charAt(i)) {
+                continue;
+            }else if((int)this.charAt(i) -(int)other.charAt(i) >0){
+                return 1;
+            }else{
+				return -1;
+			}
+        }
+        if (this.length() < other.length()&& this.length()-other.length() < 0) {
+            return -1;
+        }else if (this.length() > other.length() && this.length()-other.length()> 0) {
+            return 1;
+		}else {
             return 0;
         }
-        if(str1 == null && str2 != null){
-            return 1;
-        }else if(str1 != null && str2 == null){
-            return -1;
-
-        }
-        
-        
-        for(int i = 0; i<str1.length() && i<str2.length(); i++){
-            if(str1.charAt(i) ==  )
-
-        }
-
 	}
-
 	//RETURNS 0 iff strings are lexically identical
 	public boolean equals(MyString other)
 	{
-		return this==other; //just to make it compile
+		if(myCompareTo(other) == 0){
+			return true;
+		}else{
+			return false;
+		} //just to make it compile
 	}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
