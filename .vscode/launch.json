@@ -1,0 +1,197 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "GraphLLTester",
+            "request": "launch",
+            "mainClass": "GraphLLTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "HashCodeTester",
+            "request": "launch",
+            "mainClass": "HashCodeTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "ArrBagTester",
+            "request": "launch",
+            "mainClass": "ArrBagTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "BoggleStarter",
+            "request": "launch",
+            "mainClass": "BoggleStarter",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "CDLL_JosephusTester",
+            "request": "launch",
+            "mainClass": "CDLL_JosephusTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "CDLL_ListTester",
+            "request": "launch",
+            "mainClass": "CDLL_ListTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "ComplexSwamp",
+            "request": "launch",
+            "mainClass": "ComplexSwamp",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "DrugInteractions",
+            "request": "launch",
+            "mainClass": "DrugInteractions",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "GraphTester",
+            "request": "launch",
+            "mainClass": "GraphTester",
+            "projectName": "rae70_cs445_b4c61002",
+            "args": "graphData.txt"
+        },
+        {
+            "type": "java",
+            "name": "Hanoi",
+            "request": "launch",
+            "mainClass": "Hanoi",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "Jumbles",
+            "request": "launch",
+            "mainClass": "Jumbles",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "Knapsack",
+            "request": "launch",
+            "mainClass": "Knapsack",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "L2_SetOps",
+            "request": "launch",
+            "mainClass": "L2_SetOps",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "LL_RecursiveTester",
+            "request": "launch",
+            "mainClass": "LL_RecursiveTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "Lab0",
+            "request": "launch",
+            "mainClass": "Lab0",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "LinkedListTester",
+            "request": "launch",
+            "mainClass": "LinkedListTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "LinkedListTester1",
+            "request": "launch",
+            "mainClass": "LinkedListTester1",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "MyStringTester",
+            "request": "launch",
+            "mainClass": "MyStringTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "Pacs",
+            "request": "launch",
+            "mainClass": "Pacs",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "Potus",
+            "request": "launch",
+            "mainClass": "Potus",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "Shuffler",
+            "request": "launch",
+            "mainClass": "Shuffler",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "SimpleSwamp",
+            "request": "launch",
+            "mainClass": "SimpleSwamp",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "TinyTester",
+            "request": "launch",
+            "mainClass": "TinyTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "TopCardPlacer",
+            "request": "launch",
+            "mainClass": "TopCardPlacer",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "TowerTester",
+            "request": "launch",
+            "mainClass": "TowerTester",
+            "projectName": "rae70_cs445_b4c61002"
+        },
+        {
+            "type": "java",
+            "name": "TreeSetOps",
+            "request": "launch",
+            "mainClass": "TreeSetOps",
+            "projectName": "rae70_cs445_b4c61002"
+        }
+    ]
+}

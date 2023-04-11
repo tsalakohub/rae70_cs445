@@ -3,6 +3,8 @@
 import java.io.*;
 import java.util.*;
 
+
+
 public class LL_Recursive<T>
 {
 	private Node<T> head;  // pointer to the front (first) element of the list
@@ -27,16 +29,31 @@ public class LL_Recursive<T>
  	public boolean contains( T key )
  	{
  		//cal search if null return false
-        return false; //JUST TO MAKE IT COMPILE. REPLACE WITH YOUR CODE
+		return search(key) != null; //JUST TO MAKE IT COMPILE. REPLACE WITH YOUR CODE
 	}
 
 	// YOU MUST WRITE THIS USING RECURSION
 	// YOU WILL HAVE TO WRITE A HELPER METHOD. THE HELPER WILL BE RECURSIVE
 	public void insertAtTail(T data)
 	{
+		if(head == null){
+			insertAtFront(data);
+			return; 
+		}
+		insertAtTailHelper(head, data);
 		// YOUR CODE HERE. MUST USE insertAtFront() IN BASE CASE
 	}
-
+	private Node<T> insertAtTailHelper(Node<T> head, T data){
+		if(head.next == null){
+			head.next = new Node<T>(data, null);
+			return head.next;
+		}else
+		{
+			return insertAtTailHelper(head.next, data);
+		}
+		//return head;
+		
+	}
 	// WE will illustrate this in class today 2/6/2022
 	public int size()
 	{
@@ -50,24 +67,35 @@ public class LL_Recursive<T>
 	
 	// USE THE TOSTRING AS OUR PRINT.  ***MUST RE-WRITE USING RECURSION***
 	// YOU WILL HAVE TO WRITE A HELPER METHOD. THE HELPER WILL BE RECURSIVE
+
+	private String toStringHelper(Node<T> cur){
+		if(cur.next != null){
+			return cur.data  + " -> "+ toStringHelper(cur.next);
+		}else{
+			return (String) cur.data;
+		}
+	}
 	public String toString()
 	{
-		String toString = "";
-
-		for (Node<T> curr = head; curr != null; curr = curr.next)
-		{
-			toString += curr.data;		// WE ASSUME OUR T TYPE HAS toString() DEFINED
-			if (curr.next != null)
-				toString += " -> ";
-		}
-
-		return toString + "\n";
+		return toStringHelper(head);
 	}
 
 	// MUST BE RECURSIVE. YOU WILL HAVE TO WRITE A HELPER METHOD. THE HELPER WILL BE RECURSIVE
+	
+	
 	public Node<T> search( T key )
 	{
-		return null; //JUST TO MAKE IT COMPILE. REPLACE WITH YOUR CODE
+		return searchHelper(head, key); //JUST TO MAKE IT COMPILE. REPLACE WITH YOUR CODE
+	}
+	
+	private Node<T> searchHelper(Node<T> head ,T key){
+		if(head == null){
+			return head;
+		}
+		if(head.data.equals(key)){
+			return head;
+		}
+		return searchHelper(head.next, key);
 	}
 } //END OF LL_Recursive CLASS
 
