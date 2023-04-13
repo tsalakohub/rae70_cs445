@@ -9,7 +9,8 @@
             "name": "GraphLLTester",
             "request": "launch",
             "mainClass": "GraphLLTester",
-            "projectName": "rae70_cs445_b4c61002"
+            "projectName": "rae70_cs445_b4c61002",
+            "args": "gd.txt"
         },
         {
             "type": "java",

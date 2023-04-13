@@ -37,10 +37,12 @@ public class GraphLL {
             // read in the src, dest, weight
             // call addEdge
         }
+
     } // END readGraphFile
 
     // GO TO G[src] AND DO INSERTATFRONT ON THAT 'head' POINTER I.E. G[src]
     private void addEdge(int src, int dest, int weight) {
+
         Edge temp = new Edge(dest, weight, G[src]);
         G[src] = temp;
     }
@@ -49,7 +51,7 @@ public class GraphLL {
         // return false; // CHANGE/REMOVE/MOVE AS NEEDED
         // GOTO G[src] AND WALK THAT LINKED LIST LOOKING FOR A NODE (EDGE) WITH DEST
         Edge cur = G[src];
-        while (cur.next != null) {
+        while (cur != null) {
             if (cur.dest == dest) {
                 return true;
             }
@@ -63,8 +65,9 @@ public class GraphLL {
         int inDeg = 0;
         // WALK ALL THE LISTS COUNTING THE NODE HAVING THIS DEST
         for (int i = 0; i < numNode; i++) {
-            if (hasEdge(i, dest) == true) {
+            if (hasEdge(i, dest)) {
                 inDeg++;
+                // System.out.println(inDeg);
             }
         }
         // System.out.println(numNode);
@@ -76,8 +79,7 @@ public class GraphLL {
         int outDeg = 0;
         // JUST RETURN THE LENGTH OF THIS LIST AT G[src]
         Edge cur = G[src];
-        outDeg++;
-        while (cur.next != null) {
+        while (cur != null) {
             cur = cur.next;
             outDeg++;
 
@@ -180,15 +182,17 @@ public class GraphLL {
                 throw new Exception("valid input");
 
             }
-            // G[fromNode][toNode] = -1;
+
             if (G[src].next == null) {
                 G[src] = null;
+            } else {
+                Edge cur = G[src];
+
+                while (cur.next.next != null) {
+                    cur = cur.next;
+                }
+                cur.next = null;
             }
-            Edge cur = G[src];
-            while (cur.next.next != null) {
-                cur = cur.next;
-            }
-            cur.next = null;
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -207,10 +211,25 @@ public class GraphLL {
     // TOSTRING
     public String toString() {
         String the2String = "";
+
         // SEE OUTPUT
         for (int i = 0; i < numNode; i++) {
-            the2String += i + ":" + " " + "->";
-            the2String += "\n";
+            the2String += i + ":" + " ";
+
+            Edge cur = G[i];
+            if (cur == null) {
+                the2String += " ";
+                the2String += "\n";
+            } else {
+                while (cur != null) {
+                    the2String += "->" + " " + "[" + cur.dest + "," + cur.weight + "]" + " ";
+
+                    // System.out.println(cur.dest + " " + cur.weight);
+                    cur = cur.next;
+                }
+                the2String += "\n";
+
+            }
 
         }
 
