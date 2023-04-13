@@ -57,6 +57,9 @@ public class MyHashSet implements HS_Interface {
     }
 
     public void clear() {
+        for(int i = 0; i < bucketArray.length; i++){
+            bucketArray[i] = null;
+        }
     }
 
     public int size() {
