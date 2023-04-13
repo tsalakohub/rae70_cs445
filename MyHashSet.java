@@ -53,7 +53,7 @@ public class MyHashSet implements HS_Interface {
     }
 
     public boolean isEmpty() {
-        return false;
+        return(size() == 0);
     }
 
     public void clear() {
@@ -63,7 +63,7 @@ public class MyHashSet implements HS_Interface {
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 
 } // END MyHashSet CLASS
