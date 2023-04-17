@@ -54,39 +54,52 @@ public class LinkedList<T extends Comparable<T>>
 		tail = null;
 		Node<T> cur1 = this.head;
 		Node<T> cur2 = other.head;
+		Node<T> cur = merge.head;
 
-		while(cur2 != null ){
+		if(cur1.data.compareTo(cur2.data) < 0 ){
+			merge.head = new Node<T>(cur1.data, null);
+			cur = merge.head;
+			cur1 = cur1.next;
+		}else{
+			merge.head = new Node<T>(cur2.data, null);
+			cur = merge.head;
+			cur2 = cur2.next;
+		}
+
+		while((cur1 != null) && (cur2 != null )){
 			if(cur1.data.compareTo(cur2.data) < 0 ){
-				merge.insertAtTail(cur1.data);
-				tail = cur1;
+				
+				cur.next = new Node<T>(cur1.data, null);
+				cur = cur.next;
 				cur1 = cur1.next;
 				//System.out.print(cur1.data);
 			}else{
-				merge.insertAtTail(cur2.data);
-				tail = cur2;
+				//merge.insertAtTail(cur2.data);
+				cur.next = new Node<T>(cur2.data, null);
+				cur = cur.next;
 				cur2 = cur2.next;
-				//System.out.print(cur2.data);
 			}
 			
 		}
 		if(cur2 == null){
 			while(cur1 != null){
-			merge.insertAtTail(cur1.data);
+			//merge.insertAtTail(cur1.data);
+			cur.next = new Node<T>(cur1.data, null);
+			cur = cur.next;
 			cur1 = cur1.next;
 			}
 		}
 		if(cur1 == null){
 			while(cur2 != null){
-			merge.insertAtTail(cur2.data);
+			//merge.insertAtTail(cur2.data);
+			cur.next = new Node<T>(cur2.data, null);
+			cur = cur.next;
 			cur2 = cur2.next;
 			}
 		}
 
 		
 
-		//System.out.print(cur1.data);
-		//System.out.print(cur1.data);
-		//System.out.print(cur2.data);
 		return merge;
 	}
 } //END OF LINKEDLIST CLASS DEFINITION

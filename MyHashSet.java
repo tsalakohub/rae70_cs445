@@ -42,6 +42,7 @@ public class MyHashSet implements HS_Interface {
         while (cur != null && !key.equals(cur.data)) {
             cur = cur.next;
         }
+    
         return cur; // YOUR CODE HERE
     }
 
